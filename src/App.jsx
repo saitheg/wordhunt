@@ -13,7 +13,7 @@ export default function App() {
   const [foundWords, setFoundWords] = useState([]);
   const [showNoModal, setShowNoModal] = useState(false);
   const [isMorphing, setIsMorphing] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(30);
   const [score, setScore] = useState(0);
 
   useEffect(() => {
