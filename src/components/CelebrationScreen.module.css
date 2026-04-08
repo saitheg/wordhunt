@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  /* Western Air Temple vibe - warm stone tones */
+  background: linear-gradient(135deg, #d3b48c 0%, #a67c52 100%);
+  color: var(--water-dark);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 10px double rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.content {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: var(--water-dark);
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+  line-height: 1.2;
+}
+
+.timerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.timeBox {
+  background: rgba(255, 255, 255, 0.6);
+  border: 2px solid var(--earth-brown);
+  border-radius: 12px;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.8);
+}
+
+.value {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--fire-red);
+  line-height: 1;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--earth-brown);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.footerText {
+  margin-top: 50px;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--earth-brown);
+  text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}

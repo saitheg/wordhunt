@@ -1,0 +1,152 @@
+:root {
+  /* Water Tribe Palette */
+  --water-light: #a8d8ea;
+  --water-med: #2e6b8a;
+  --water-dark: #1a3a5c;
+
+  /* Earth Kingdom Palette */
+  --earth-green: #4a5e3a;
+  --earth-brown: #8b7355;
+  --earth-light: #b49b79;
+
+  /* Fire Nation Palette */
+  --fire-red: #c0392b;
+  --fire-gold: #e8a838;
+
+  /* Air Nomad Palette */
+  --air-white: #f5e6c8;
+  --air-orange: #e07b39;
+
+  /* Fonts */
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100svh;
+  width: 100vw;
+  font-family: var(--font-body);
+  background-color: var(--water-dark);
+  color: var(--air-white);
+  overflow-x: hidden;
+  user-select: none;
+  touch-action: pan-y;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Background looping water ripple/cloud texture */
+body::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(ellipse at center, rgba(46, 107, 138, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom, rgba(232, 168, 56, 0.1) 0%, transparent 50%);
+  z-index: -1;
+  animation: slowFloat 20s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes slowFloat {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.1) translate(5%, 5%); }
+}
+
+.app-container {
+  width: 100%;
+  max-width: 390px;
+  height: 100svh;
+  max-height: 850px;
+  position: relative;
+  background: var(--water-dark);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Base parchment style for cards/modals */
+.parchment {
+  background: var(--air-white);
+  color: var(--earth-brown);
+  border: 4px solid var(--earth-brown);
+  border-radius: 8px;
+  box-shadow: inset 0 0 20px rgba(139, 115, 85, 0.4), 
+              0 8px 16px rgba(0,0,0,0.3);
+  position: relative;
+}
+.parchment::before {
+  content: '';
+  position: absolute;
+  top: 4px; left: 4px; right: 4px; bottom: 4px;
+  border: 1px dashed rgba(139, 115, 85, 0.5);
+  pointer-events: none;
+}
+
+.heading-font {
+  font-family: var(--font-heading);
+}
+
+/* Utility to center flex */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Logo mark */
+.avatar-logo-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px dashed rgba(245, 230, 200, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.avatar-logo-bg::after {
+  content: '🪷';
+}
+
+@keyframes drift {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.2; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  animation: drift 15s linear infinite;
+  font-size: 1.5rem;
+  filter: sepia(0.5) hue-rotate(320deg);
+}
+.particle:nth-child(1) { left: 10%; animation-duration: 18s; animation-delay: 0s; }
+.particle:nth-child(2) { left: 30%; animation-duration: 22s; animation-delay: -5s; font-size: 1rem; }
+.particle:nth-child(3) { left: 60%; animation-duration: 15s; animation-delay: -10s; font-size: 2rem; }
+.particle:nth-child(4) { left: 80%; animation-duration: 20s; animation-delay: -2s; }
+.particle:nth-child(5) { left: 90%; animation-duration: 16s; animation-delay: -7s; font-size: 1.2rem; }
