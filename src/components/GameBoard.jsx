@@ -21,12 +21,12 @@ import { clsx } from 'clsx';
 // B(15)-O(14)-Y(10) ... wait, letters can move in any adjacent.
 // Let's lay it out manually.
 const LETTERS = [
-  'F', 'R', 'I', 'E',
-  'J', 'L', 'X', 'N',
-  'B', 'O', 'Y', 'D',
-  'S', 'T', 'A', 'Z'
+  'V', 'F', 'R', 'I',
+  'J', 'L', 'X', 'E',
+  'B', 'O', 'Y', 'N',
+  'S', 'T', 'A', 'D'
 ];
-// FRIEND connect path: 0->1->2->3->7->6
+// FRIEND connect path: 1->2->3->7->11->15
 // BOY connect path: 8->9->10
 // Let's check adjacencies:
 // 0(F)-1(R)-2(I)-3(E)
@@ -116,7 +116,7 @@ export default function GameBoard({ onWordFound, foundWords, isMorphing }) {
 
           // Identify if this letter is part of the found BOy or FRIEND
           const isBoyPath = showTargetGreen && [8, 9, 10].includes(index);
-          const isFriendPath = showTargetGreen && [0, 1, 2, 3, 6, 7].includes(index);
+          const isFriendPath = showTargetGreen && [1, 2, 3, 7, 11, 15].includes(index);
           const isFound = isBoyPath || isFriendPath;
 
           return (
