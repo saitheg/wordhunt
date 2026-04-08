@@ -22,11 +22,11 @@ import { clsx } from 'clsx';
 // Let's lay it out manually.
 const LETTERS = [
   'F', 'R', 'I', 'E',
-  'A', 'L', 'N', 'D',
-  'B', 'O', 'Y', 'W',
-  'S', 'T', 'A', 'R'
+  'J', 'L', 'X', 'N',
+  'B', 'O', 'Y', 'D',
+  'S', 'T', 'A', 'Z'
 ];
-// FRIEND connect path: 0->1->2->3->6->7
+// FRIEND connect path: 0->1->2->3->7->6
 // BOY connect path: 8->9->10
 // Let's check adjacencies:
 // 0(F)-1(R)-2(I)-3(E)
@@ -62,20 +62,20 @@ export default function GameBoard({ onWordFound, foundWords, isMorphing }) {
 
   const handlePointerMove = (e) => {
     if (!isDragging || isMorphing) return;
-    
+
     // Find grid item under pointer coordinates
     const touch = e;
     const target = document.elementFromPoint(touch.clientX, touch.clientY);
-    
+
     if (target && target.dataset.index !== undefined) {
       const index = parseInt(target.dataset.index, 10);
-      
+
       const lastIndex = selectedIndices[selectedIndices.length - 1];
       if (index !== lastIndex) {
         // If we are backtracking
         if (selectedIndices.length > 1 && index === selectedIndices[selectedIndices.length - 2]) {
           setSelectedIndices(prev => prev.slice(0, -1));
-        } 
+        }
         // If it's a new adjacent cell and not already selected
         else if (!selectedIndices.includes(index) && isAdjacent(lastIndex, index)) {
           setSelectedIndices(prev => [...prev, index]);
@@ -87,7 +87,7 @@ export default function GameBoard({ onWordFound, foundWords, isMorphing }) {
   const handlePointerUp = () => {
     if (!isDragging || isMorphing) return;
     setIsDragging(false);
-    
+
     const word = getWordFromIndices(selectedIndices);
     onWordFound(word);
     setSelectedIndices([]);
@@ -100,7 +100,7 @@ export default function GameBoard({ onWordFound, foundWords, isMorphing }) {
   }, []);
 
   return (
-    <div 
+    <div
       className={clsx(styles.boardContainer, isMorphing && styles.morphing)}
       ref={boardRef}
       onPointerMove={handlePointerMove}
@@ -113,7 +113,7 @@ export default function GameBoard({ onWordFound, foundWords, isMorphing }) {
           const isBoyFound = foundWords.includes('BOY');
           const isFriendFound = foundWords.includes('FRIEND');
           const showTargetGreen = isBoyFound && isFriendFound;
-          
+
           // Identify if this letter is part of the found BOy or FRIEND
           const isBoyPath = showTargetGreen && [8, 9, 10].includes(index);
           const isFriendPath = showTargetGreen && [0, 1, 2, 3, 6, 7].includes(index);
@@ -141,14 +141,14 @@ export default function GameBoard({ onWordFound, foundWords, isMorphing }) {
 
       {isMorphing && (
         <div className={styles.spelledWordContainer}>
-          { "BOYFRIEND".split('').map((char, i) => (
-             <div key={i} className={styles.spelledChar} style={{ animationDelay: `${0.2 + i * 0.1}s` }}>
-               {char}
-             </div>
+          {"BOYFRIEND".split('').map((char, i) => (
+            <div key={i} className={styles.spelledChar} style={{ animationDelay: `${0.2 + i * 0.1}s` }}>
+              {char}
+            </div>
           ))}
         </div>
       )}
-      
+
       {/* Current word display */}
       <div className={clsx(styles.currentWord, (selectedIndices.length > 0) && styles.visible)}>
         {getWordFromIndices(selectedIndices)}
