@@ -3,12 +3,17 @@ import GameBoard from './components/GameBoard';
 import ProposalScreen from './components/ProposalScreen';
 import CelebrationScreen from './components/CelebrationScreen';
 import ConfirmNoModal from './components/ConfirmNoModal';
+import ResetScreen from './components/ResetScreen';
 import dictArray from 'an-array-of-english-words';
 
 const validWordsSet = new Set(dictArray.map(w => w.toUpperCase()));
 const wordsToFind = ['BOY', 'FRIEND'];
 
 export default function App() {
+  if (window.location.pathname === '/reset') {
+    return <ResetScreen />;
+  }
+
   const [screen, setScreen] = useState('GAME'); // GAME, PROPOSAL, CELEBRATION
   const [foundWords, setFoundWords] = useState([]);
   const [showNoModal, setShowNoModal] = useState(false);
